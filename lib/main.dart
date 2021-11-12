@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mymovilapp06/Shop.dart';
 import 'buscar.dart';
 
 void main() {
@@ -72,7 +73,21 @@ class HomeStart extends State<Home> {
                   },
                   child: Text('Buscar'),
                 ),
-              )
+              ),
+              Padding(
+                padding:
+                EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    color:
+                    Colors.deepOrange[900];
+                    print("Presionado");
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => Shop()));
+                  },
+                  child: Text('Listado de tiendas'),
+                ),
+              ),
             ],
           ),
         ),
