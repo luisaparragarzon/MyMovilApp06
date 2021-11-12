@@ -18,14 +18,14 @@ class ShopApp extends State<Shop> {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Text(
-                    'Comidas rápidas',
+                    'FOOD TRUCK: Comidas rápidas',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Text(
-                  'Perros calientes, hamburguesas y mucho más...',
+                  'Perros calientes, hamburguesas, pizzas y mucho más...',
                   style: TextStyle(
                     color: Colors.deepOrange[500],
                   ),
