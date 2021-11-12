@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'buscar.dart';
 
-void main(){
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   runApp(MyApp());
@@ -13,10 +13,22 @@ void main(){
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Home());
+  }
+}
+
+class Home extends StatefulWidget {
+  @override
+  HomeStart createState() => HomeStart();
+}
+
+class HomeStart extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: '¡Bienvenido grupo 01!',
       theme: ThemeData(
-          cardColor: Colors.deepOrange[900],
+        cardColor: Colors.deepOrange[900],
       ),
       home: Scaffold(
         backgroundColor: Colors.grey[50],
@@ -27,7 +39,8 @@ class MyApp extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: 20,top: 40,right: 20,bottom: 0),
+                padding:
+                    EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 0),
                 child: Center(
                   child: Container(
                     width: 150,
@@ -47,12 +60,15 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                padding:
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
                   onPressed: () {
-                    color: Colors.deepOrange[900];
+                    color:
+                    Colors.deepOrange[900];
                     print("Presionado");
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => buscar()));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => buscar()));
                   },
                   child: Text('Buscar'),
                 ),
