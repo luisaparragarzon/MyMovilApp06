@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mymovilapp06/Shop.dart';
 import 'buscar.dart';
+import 'Usuarios/GestionUsuario.dart';
+import 'Tiendas/GestionTiendas.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,30 +22,33 @@ class Home extends StatefulWidget {
   HomeStart createState() => HomeStart();
 }
 
+@override
 class HomeStart extends State<Home> {
+  TextEditingController busqueda = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '¡Bienvenido grupo 01!',
+      title: 'Aplicación del grupo 01',
       theme: ThemeData(
-        cardColor: Colors.deepOrange[900],
+        primarySwatch: Colors.deepOrange,
+        cardColor: Colors.deepOrange,
       ),
       home: Scaffold(
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
-          title: Text('App grupo 01'),
+          title: Text('¡Bienvenido a la tienda del grupo 01!'),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Padding(
                 padding:
-                    EdgeInsets.only(left: 20, top: 40, right: 20, bottom: 0),
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: Center(
                   child: Container(
                     width: 150,
                     height: 150,
-                    child: Image.asset('image/logo.png'),
+                    child: Image.asset('images/logo.png'),
                   ),
                 ),
               ),
@@ -65,27 +67,37 @@ class HomeStart extends State<Home> {
                     EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
                   onPressed: () {
-                    color:
-                    Colors.deepOrange[900];
                     print("Presionado");
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => buscar()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => buscar(busqueda.text)));
                   },
                   child: Text('Buscar'),
                 ),
               ),
               Padding(
                 padding:
-                EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
                   onPressed: () {
-                    color:
-                    Colors.deepOrange[900];
-                    print("Presionado");
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Shop()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => GestionTiendas()));
                   },
-                  child: Text('Listado de tiendas'),
+                  child: Text('Gestionar tienda'),
+                ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: Size(500, 50)),
+                  onPressed: () {
+                    //print("Presionado");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => GestionUsuario()));
+                  },
+                  child: Text('Gestión usuario'),
                 ),
               ),
             ],

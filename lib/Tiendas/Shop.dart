@@ -1,20 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'Tiendas/ShopOne.dart';
 
-class buscar extends StatefulWidget {
-  final String searchWord;
-  buscar(this.searchWord);
+class Shop extends StatefulWidget {
   @override
-  BuscarApp createState() => BuscarApp();
+  ShopApp createState() => ShopApp();
 }
 
-class BuscarApp extends State<buscar> {
-  @override
+class ShopApp extends State<Shop> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registro de búsqueda"),
+        title: Text('Lista de tiendas'),
         backgroundColor: Colors.deepOrange,
       ),
       body: Container(
@@ -25,21 +21,16 @@ class BuscarApp extends State<buscar> {
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) return CircularProgressIndicator();
-              // print(widget.searchWord);
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length, // Define las iteraciones
                 itemBuilder: (BuildContext context, int index) {
-                  if (snapshot.data!.docs[index]
-                      .get("nombreTienda")
-                      .toString()
-                  .toUpperCase()
-                      .contains(widget.searchWord.toUpperCase())) {
-                    return new Card(
-                      child: new Column(
-                        children: <Widget>[
-                          Container(
-                            padding: const EdgeInsets.all(15),
-                            child: Row(children: [
+                  return new Card(
+                    child: new Column(
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            children: [
                               Expanded(
                                   child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +43,8 @@ class BuscarApp extends State<buscar> {
                                   Text(
                                     snapshot.data!.docs[index].get("descrip"),
                                     style: TextStyle(
-                                      color: Colors.green[500],
+                                      color: Colors.deepOrange[800],
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
@@ -64,16 +56,18 @@ class BuscarApp extends State<buscar> {
                                     snapshot.data!.docs[index].get("ruta")),
                               ),
                               ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => ShopOne(snapshot.data!.docs[index].id)));
-                                  }, child: Text('Ingresar'))
-                            ]),
-                          )
-                        ],
-                      ),
-                    );
-                  }
-                  return new Card();
+                                onPressed: () {},
+                                child: Text('Ingresar'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.deepOrange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               );
             },
