@@ -84,7 +84,7 @@ class HomeStart extends State<Home> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => GestionTiendas()));
                   },
-                  child: Text('Gestionar tienda'),
+                  child: Text('Gestionar la tienda'),
                 ),
               ),
               Padding(
