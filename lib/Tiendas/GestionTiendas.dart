@@ -12,6 +12,7 @@ class GestionTiendasApp extends State<GestionTiendas> {
   TextEditingController busqueda = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Gestión de tiendas"),

@@ -32,7 +32,7 @@ class BuscarApp extends State<buscar> {
                   if (snapshot.data!.docs[index]
                       .get("nombreTienda")
                       .toString()
-                  .toUpperCase()
+                      .toUpperCase()
                       .contains(widget.searchWord.toUpperCase())) {
                     return new Card(
                       child: new Column(
@@ -65,15 +65,21 @@ class BuscarApp extends State<buscar> {
                               ),
                               ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => ShopOne(snapshot.data!.docs[index].id)));
-                                  }, child: Text('Ingresar'))
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => ShopOne(snapshot
+                                                .data!.docs[index].id)));
+                                  },
+                                  child: Text('Ingresar'))
                             ]),
                           )
                         ],
                       ),
                     );
+                  } else {
+                    return new Card();
                   }
-                  return new Card();
                 },
               );
             },
