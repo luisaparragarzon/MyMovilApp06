@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mymovilapp06/Tiendas/Tienda.dart';
+import 'ShopOne.dart';
 
 class Shop extends StatefulWidget {
   @override
@@ -7,6 +9,8 @@ class Shop extends StatefulWidget {
 }
 
 class ShopApp extends State<Shop> {
+  Tienda tiendaObjeto = new Tienda();
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +60,25 @@ class ShopApp extends State<Shop> {
                                     snapshot.data!.docs[index].get("ruta")),
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  tiendaObjeto.idTienda =
+                                      snapshot.data!.docs[index].id;
+                                  tiendaObjeto.nombre = snapshot
+                                      .data!.docs[index]
+                                      .get("nombreTienda");
+                                  tiendaObjeto.descripcion =
+                                      snapshot.data!.docs[index].get("descrip");
+                                  tiendaObjeto.imagen =
+                                      snapshot.data!.docs[index].get("ruta");
+                                  tiendaObjeto.website =
+                                      snapshot.data!.docs[index].get("webSite");
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              ShopOne(tiendaObjeto)));
+                                },
                                 child: Text('Ingresar'),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.deepOrange,

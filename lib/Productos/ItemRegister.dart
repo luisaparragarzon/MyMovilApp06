@@ -61,6 +61,7 @@ class ItemRegisterApp extends State<ItemRegister> {
                   ),
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.only(left:15,top: 15,right: 15,bottom: 0),
                 // RUTA IMÁMGEN
@@ -75,6 +76,7 @@ class ItemRegisterApp extends State<ItemRegister> {
                   ),
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.only(left:15,top: 15,right: 15,bottom: 0),
                 // DESCRIPCIÓN TIENDA
@@ -90,7 +92,6 @@ class ItemRegisterApp extends State<ItemRegister> {
                 ),
               ),
 
-
               Padding(
                   padding: EdgeInsets.only(left:15,top: 15,right: 15,bottom: 0),
                   child: ElevatedButton(
@@ -99,8 +100,6 @@ class ItemRegisterApp extends State<ItemRegister> {
                       nombre.clear();
                       precio.clear();
                       descripcion.clear();
-
-
                     },
                     child: Text("Registrar"),
                   )

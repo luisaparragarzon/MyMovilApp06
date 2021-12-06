@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'buscar.dart';
+import 'Tiendas/Shop.dart';
+import 'Tiendas/ShopRegister.dart';
 import 'Usuarios/GestionUsuario.dart';
 import 'Tiendas/GestionTiendas.dart';
 
@@ -76,6 +78,7 @@ class HomeStart extends State<Home> {
                 padding:
                     EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: Size(500, 50)),
                   onPressed: () {
                     print("Presionado");
                     Navigator.push(
@@ -90,6 +93,7 @@ class HomeStart extends State<Home> {
                 padding:
                     EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: Size(500, 50)),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => GestionTiendas()));

@@ -128,7 +128,8 @@ class ShopRegisterApp extends State<ShopRegister> {
                     descr_Tienda.clear();
                     webSite.clear();
                   },
-                  child: Text("Registrar", style: TextStyle(color: Colors.deepOrange)),
+                  child: Text("Registrar",
+                      style: TextStyle(color: Colors.deepOrange)),
                 )),
           ],
         ),
