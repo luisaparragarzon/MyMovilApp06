@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'buscar.dart';
-import 'Tiendas/Shop.dart';
-import 'Tiendas/ShopRegister.dart';
 import 'Usuarios/GestionUsuario.dart';
 import 'Tiendas/GestionTiendas.dart';
 

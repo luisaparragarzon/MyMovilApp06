@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mymovilapp06/Carrito/Carrito.dart';
 import 'package:mymovilapp06/Productos/ItemRegister.dart';
 import 'package:mymovilapp06/Usuarios/Login.dart';
 import 'package:mymovilapp06/Usuarios/Token.dart';
+import 'package:mymovilapp06/Carrito/ShoppingCart.dart';
 import 'Tienda.dart';
 
 class ShopOne extends StatefulWidget {
@@ -14,6 +16,7 @@ class ShopOne extends StatefulWidget {
 
 //
 class ShopOneApp extends State<ShopOne> {
+  String idUser = "";
   /*ShopOneApp() {
     validarDatos();
     //
@@ -24,7 +27,6 @@ class ShopOneApp extends State<ShopOne> {
   String descrLarga = "default long";
   String logo = "logo.png";
   String tiendaId = "";*/
-  String idUser = "";
   final firebase = FirebaseFirestore.instance;
 
   /*validarDatos() async {
@@ -53,12 +55,17 @@ class ShopOneApp extends State<ShopOne> {
     }
   }
 */
-  registrarCarrito(String idTienda, String idUsuario, String idProducto) async {
+  registrarCarrito(Carrito cart) async {
     try {
       await firebase.collection("Carrito").doc().set({
-        "UserId": idUsuario,
-        "ShopId": idTienda,
-        "ItemId": idProducto,
+        "UserId": cart.idUser,
+        "NombreTienda": cart.nombreTienda,
+        "ProductoId": cart.idItem,
+        "PrecioItem": cart.precioItem,
+        "NombreItem": cart.nombreItem,
+        "Descripcion": cart.descripocionItem,
+        "Cantidad": cart.cantidad,
+        "total": cart.total
       });
     } catch (e) {
       print(e);
@@ -222,20 +229,40 @@ class ShopOneApp extends State<ShopOne> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (_) => Login()));
+                                            } else {
+                                              Carrito cart = new Carrito();
+                                              cart.precioItem = snapshot
+                                                  .data!.docs[index]
+                                                  .get("Precio");
+                                              cart.descripocionItem = snapshot
+                                                  .data!.docs[index]
+                                                  .get("Descripcion");
+                                              cart.idItem =
+                                                  snapshot.data!.docs[index].id;
+                                              cart.idUser = idUser;
+                                              cart.nombreItem = snapshot
+                                                  .data!.docs[index]
+                                                  .get("Nombre");
+                                              cart.nombreTienda =
+                                                  widget.objetoTienda.nombre;
+                                              mensaje(
+                                                  "Carrito",
+                                                  "¿Desea agregar el producto al carrito? Digite la cantidad",
+                                                  cart);
                                             }
                                           },
                                           heroTag: null,
                                           child: const Icon(
                                               Icons.add_shopping_cart),
-                                          backgroundColor: Colors.blueGrey,
+                                          backgroundColor: Colors.black,
                                           tooltip: 'Agregar al carrito'),
                                       FloatingActionButton(
                                           onPressed: () {},
                                           // child: const Icon(Icons.add_shopping_cart),
                                           child: Text("Ver"),
                                           heroTag: null,
-                                          backgroundColor: Colors.blue,
-                                          tooltip: 'Agregar al carrito')
+                                          backgroundColor: Colors.deepOrange,
+                                          tooltip: 'Ver producto')
                                     ],
                                   ),
                                 )
@@ -274,5 +301,49 @@ class ShopOneApp extends State<ShopOne> {
         ),
       ],
     );
+  }
+
+  void mensaje(String titulo, String mess, Carrito cart) {
+    TextEditingController cant = TextEditingController();
+    cant.text = "1";
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text(titulo),
+            content: Text(mess),
+            actions: <Widget>[
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+                child: TextField(
+                  controller: cant,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    labelText: 'Cantidad',
+                    hintText: 'Digite la cantidad',
+                  ),
+                ),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  cart.cantidad = double.parse(cant.text);
+                  cart.total = cart.cantidad * cart.precioItem;
+                  registrarCarrito(cart);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => ShoppingCart()));
+                },
+                child: Text("Aceptar", style: TextStyle(color: Colors.black)),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Cancelar", style: TextStyle(color: Colors.black)),
+              )
+            ],
+          );
+        });
   }
 }

@@ -39,14 +39,14 @@ class Token {
         int flag = 0;
         for (var cursor in token.docs) {
           if (cursor.get("TokenId").toString() == isToken.toString()) {
-            //si HAY sesión activa;
+            // Si hay sesión activa;
             isSession = cursor.get("UserId");
             print("Sesion....." + isSession);
           }
         }
         print(flag);
         if (flag == 0) {
-          //  mensaje("No encotrado","No se encontró el usuario");
+          // Mensaje("No encontrado","No se encontró el usuario");
         }
       } else {
         print("No hay elementos en la colección ");
