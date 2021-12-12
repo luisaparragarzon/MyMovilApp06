@@ -25,9 +25,10 @@ class Token {
     }
   }
 
-  Future validarToken() async {
+  Future validarToken(String x) async {
     String isSession = "vacio";
     String? isToken = "";
+    String idToken = "";
     try {
       await Firebase.initializeApp();
       isToken = await FirebaseMessaging.instance.getToken();
@@ -41,6 +42,7 @@ class Token {
           if (cursor.get("TokenId").toString() == isToken.toString()) {
             // Si hay sesión activa;
             isSession = cursor.get("UserId");
+            idToken = cursor.id;
             print("Sesion....." + isSession);
           }
         }
@@ -54,6 +56,10 @@ class Token {
     } catch (e) {
       print(e);
     }
-    return isSession;
+    if (x == "Login") {
+      return idToken;
+    } else {
+      return isSession;
+    }
   }
 }

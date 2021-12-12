@@ -65,7 +65,7 @@ class ShopOneApp extends State<ShopOne> {
         "NombreItem": cart.nombreItem,
         "Descripcion": cart.descripocionItem,
         "Cantidad": cart.cantidad,
-        "total": cart.total
+        "total": cart.total,
       });
     } catch (e) {
       print(e);
@@ -222,7 +222,7 @@ class ShopOneApp extends State<ShopOne> {
                                           onPressed: () async {
                                             Token tk = new Token();
                                             String idUser =
-                                                await tk.validarToken();
+                                                await tk.validarToken("");
                                             print(idUser);
                                             if (idUser == "vacio") {
                                               Navigator.push(
@@ -262,7 +262,7 @@ class ShopOneApp extends State<ShopOne> {
                                           child: Text("Ver"),
                                           heroTag: null,
                                           backgroundColor: Colors.deepOrange,
-                                          tooltip: 'Ver producto')
+                                          tooltip: 'Ver el producto')
                                     ],
                                   ),
                                 )
@@ -331,8 +331,10 @@ class ShopOneApp extends State<ShopOne> {
                   cart.cantidad = double.parse(cant.text);
                   cart.total = cart.cantidad * cart.precioItem;
                   registrarCarrito(cart);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => ShoppingCart()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => ShoppingCart(cart.idUser)));
                 },
                 child: Text("Aceptar", style: TextStyle(color: Colors.black)),
               ),
